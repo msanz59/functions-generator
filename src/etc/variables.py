@@ -1,10 +1,12 @@
+import json
+
 class Variables:
     checkbox_state = False
     language_selected = ""
-    theme_selected = ""
+    theme_selected = "global"
     function_parameters = {}
     function_output = None
-    focus_mode = "Simplicidad de codigo"
+    focus_mode = "Code simplicity"
 
     @staticmethod
     def check():
@@ -34,3 +36,31 @@ class Variables:
     def set_focus_mode(mode):
         Variables.focus_mode = mode
         print(f"Focus mode set to: {Variables.focus_mode}")
+
+    def read_config():
+        try:
+            with open('config.json', 'r', encoding='utf-8') as f:
+                jsonconfig = json.load(f)
+                Variables.checkbox_state = jsonconfig.get("checkbox_state", False)
+                Variables.language_selected = jsonconfig.get("language_selected", "")
+                Variables.theme_selected = jsonconfig.get("theme_selected", "global")
+                Variables.function_parameters = jsonconfig.get("function_parameters", {})
+                Variables.function_output = jsonconfig.get("function_output", None)
+                Variables.focus_mode = jsonconfig.get("focus_mode", "Code simplicity")
+                print("Configuration loaded from config.json")
+
+        except FileNotFoundError:
+            print("No configuration file found. Using default settings.")
+
+    def write_config():
+        jsonconfig = {
+            "checkbox_state": Variables.checkbox_state,
+            "language_selected": Variables.language_selected,
+            "theme_selected": Variables.theme_selected,
+            "function_parameters": Variables.function_parameters,
+            "function_output": Variables.function_output,
+            "focus_mode": Variables.focus_mode
+        }
+        with open('config.json', 'w', encoding='utf-8') as f:
+            json.dump(jsonconfig, f, ensure_ascii=False, indent=4)
+        print("Configuration saved to config.json")
