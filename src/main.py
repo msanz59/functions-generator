@@ -58,9 +58,9 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     
 
     
-with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True):
+with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True, no_collapse=True):
     dpg.add_text("Select the application theme:")
-    dpg.add_radio_button(["global", "dark", "dracula"], default_value=vars.theme_selected, 
+    dpg.add_radio_button(["global", "dark", "dracula", "terra"], default_value=vars.theme_selected, 
                          callback=lambda s, a: apply_theme(a))
 
 dpg.create_viewport(title="Functions Generator", width=800, height=800, resizable=False, small_icon=small_image_dir, large_icon=large_image_dir)

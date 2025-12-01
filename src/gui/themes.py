@@ -24,6 +24,18 @@ with dpg.theme() as dracula_theme:
         dpg.add_theme_color(dpg.mvThemeCol_TitleBgActive, (98, 100, 120, 255))
         dpg.add_theme_color(dpg.mvThemeCol_Button, (98, 100, 120, 255))
         dpg.add_theme_color(dpg.mvThemeCol_ButtonHovered, (120, 122, 140, 255))
+
+with dpg.theme() as terra_theme: 
+    with dpg.theme_component(dpg.mvAll):
+        dpg.add_theme_color(dpg.mvThemeCol_WindowBg, (139, 125, 107, 255))  
+        dpg.add_theme_color(dpg.mvThemeCol_TitleBg, (119, 136, 102, 255))   
+        dpg.add_theme_color(dpg.mvThemeCol_TitleBgActive, (144, 161, 127, 255)) 
+        dpg.add_theme_color(dpg.mvThemeCol_Button, (144, 161, 127, 255))   
+        dpg.add_theme_color(dpg.mvThemeCol_ButtonHovered, (164, 181, 147, 255))  
+        dpg.add_theme_color(dpg.mvThemeCol_Text, (40, 35, 30, 255))         
+        dpg.add_theme_color(dpg.mvThemeCol_FrameBg, (159, 145, 127, 255))   
+        dpg.add_theme_color(dpg.mvThemeCol_FrameBgHovered, (179, 165, 147, 255))  
+        dpg.add_theme_color(dpg.mvThemeCol_CheckMark, (96, 108, 85, 255))   
     
 
 
@@ -31,5 +43,6 @@ with dpg.theme() as dracula_theme:
 themes = {
     "global": global_theme,
     "dark": dark_theme,
-    "dracula": dracula_theme
+    "dracula": dracula_theme,
+    "terra": terra_theme
 }
