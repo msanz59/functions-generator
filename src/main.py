@@ -1,8 +1,17 @@
+import ctypes
+myappid = 'mycompany.myproduct.subproduct.'  
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
 import dearpygui.dearpygui as dpg
 from etc.variables import Variables as vars
+import os
 dpg.create_context()
 
 import gui.themes as themes
+
+base_dir = os.path.dirname(__file__)
+small_image_dir = os.path.join(base_dir, "gui", "icons", "small_icon.ico")
+large_image_dir = os.path.join(base_dir, "gui", "icons", "large_icon.ico")
 
 # Load configuration on start
 vars.read_config()
@@ -44,10 +53,10 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     
 with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True):
     dpg.add_text("Select the application theme:")
-    dpg.add_radio_button(["global", "dark"], default_value=vars.theme_selected, 
+    dpg.add_radio_button(["global", "dark", "dracula"], default_value=vars.theme_selected, 
                          callback=lambda s, a: apply_theme(a))
 
-dpg.create_viewport(title="Functions Generator", width=800, height=800, resizable=False)
+dpg.create_viewport(title="Functions Generator", width=800, height=800, resizable=False, small_icon=small_image_dir, large_icon=large_image_dir)
 dpg.setup_dearpygui()
 
 # Posicionar las ventanas

@@ -4,7 +4,7 @@ class Variables:
     checkbox_state = False
     language_selected = ""
     theme_selected = "global"
-    function_parameters = {}
+    function_parameters = "{}"
     function_output = None
     focus_mode = "Code simplicity"
 

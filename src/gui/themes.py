@@ -17,9 +17,19 @@ with dpg.theme() as dark_theme:
         dpg.add_theme_color(dpg.mvThemeCol_Button, (80, 80, 80, 255))
         dpg.add_theme_color(dpg.mvThemeCol_ButtonHovered, (100, 100, 100, 255))
 
+with dpg.theme() as dracula_theme:
+    with dpg.theme_component(dpg.mvAll):
+        dpg.add_theme_color(dpg.mvThemeCol_WindowBg, (40, 42, 54, 255))
+        dpg.add_theme_color(dpg.mvThemeCol_TitleBg, (68, 71, 90, 255))
+        dpg.add_theme_color(dpg.mvThemeCol_TitleBgActive, (98, 100, 120, 255))
+        dpg.add_theme_color(dpg.mvThemeCol_Button, (98, 100, 120, 255))
+        dpg.add_theme_color(dpg.mvThemeCol_ButtonHovered, (120, 122, 140, 255))
+    
+
 
 # Dict to hold themes for easy access
 themes = {
     "global": global_theme,
-    "dark": dark_theme
+    "dark": dark_theme,
+    "dracula": dracula_theme
 }
