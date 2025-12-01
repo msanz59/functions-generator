@@ -17,22 +17,22 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     dpg.add_separator()
     dpg.add_text("Choose your preferred language:")
     dpg.add_combo(["Python", "JavaScript", "C++", "Java", "Rust"], 
-                  default_value="Python", callback=lambda s, a: vars.set_language(a))
+                  default_value=vars.language_selected if vars.language_selected else "Python", callback=lambda s, a: vars.set_language(a))
     dpg.add_separator()
     dpg.add_text("Enter the function parameters: ({'param1': 'value1', 'param2': 'value2'} or leave {} for none)")
-    dpg.add_input_text(label="Parameters", default_value="{}", width=400, 
+    dpg.add_input_text(label="Parameters", default_value=str(vars.function_parameters) if vars.function_parameters else "{}", width=400, 
                        callback=lambda s, a: vars.set_function_parameters(a))
     dpg.add_separator()
 
     dpg.add_text("Enter the function output: (leave empty for none)")
-    dpg.add_input_text(label="Output", default_value="", width=400, 
+    dpg.add_input_text(label="Output", default_value=vars.function_output if vars.function_output is not None else "", width=400, 
                        callback=lambda s, a: vars.set_function_output(a))
     
     dpg.add_separator()
 
 
     dpg.add_text("Enter the focus of the generated code:")
-    dpg.add_radio_button(["Code simplicity", "Optimization [O(x)]"], 
+    dpg.add_radio_button(["Code simplicity", "Optimization [O(x)]"], default_value=vars.focus_mode, 
                          callback=lambda s, a: vars.set_focus_mode(a))
     
     dpg.add_separator()
@@ -44,7 +44,7 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     
 with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True):
     dpg.add_text("Select the application theme:")
-    dpg.add_radio_button(["global", "dark"], 
+    dpg.add_radio_button(["global", "dark"], default_value=vars.theme_selected, 
                          callback=lambda s, a: apply_theme(a))
 
 dpg.create_viewport(title="Functions Generator", width=800, height=800, resizable=False)
