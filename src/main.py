@@ -15,7 +15,16 @@ large_image_dir = os.path.join(base_dir, "gui", "icons", "large_icon.ico")
 
 # Load configuration on start
 vars.read_config()
-
+def toggle_settings_window():
+    if dpg.is_item_shown("options_window"):
+        dpg.hide_item("options_window")
+        vars.set_checkbox_state(False)
+        window_height = 600
+    else:
+        dpg.show_item("options_window")
+        vars.set_checkbox_state(True)
+        window_height = 800
+    dpg.set_viewport_height(window_height)
 def apply_theme(theme_name):
     theme = themes.themes.get(theme_name, themes.themes["global"])
     dpg.bind_theme(theme)
@@ -23,6 +32,7 @@ def apply_theme(theme_name):
 
 with dpg.window(label="Program", tag="main_window", width=800, height=600, no_resize=True, no_move=True, no_collapse=True, no_title_bar=True):
     dpg.add_text("Welcome to the function generator:", color=(255, 255, 100))
+    dpg.add_checkbox(label="Enable advanced options", default_value=vars.checkbox_state, callback=lambda s, a: toggle_settings_window())
     dpg.add_separator()
     dpg.add_text("Choose your preferred language:")
     dpg.add_combo(["Python", "JavaScript", "C++", "Java", "Rust"], 
@@ -58,12 +68,12 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     
 
     
-with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True, no_collapse=True):
+with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True, no_collapse=True, show=False):
     dpg.add_text("Select the application theme:")
     dpg.add_radio_button(["global", "dark", "dracula", "terra"], default_value=vars.theme_selected, 
                          callback=lambda s, a: apply_theme(a))
 
-dpg.create_viewport(title="Functions Generator", width=800, height=800, resizable=False, small_icon=small_image_dir, large_icon=large_image_dir)
+dpg.create_viewport(title="Functions Generator", width=800, height=600, resizable=False, small_icon=small_image_dir, large_icon=large_image_dir)
 dpg.setup_dearpygui()
 
 # Posicionar las ventanas
