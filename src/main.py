@@ -36,6 +36,7 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     dpg.add_text("Enter the function output: (leave empty for none)")
     dpg.add_input_text(label="Output", default_value=vars.function_output if vars.function_output is not None else "", width=400, 
                        callback=lambda s, a: vars.set_function_output(a))
+
     
     dpg.add_separator()
 
@@ -43,6 +44,12 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     dpg.add_text("Enter the focus of the generated code:")
     dpg.add_radio_button(["Code simplicity", "Optimization [O(x)]"], default_value=vars.focus_mode, 
                          callback=lambda s, a: vars.set_focus_mode(a))
+    
+    dpg.add_separator()
+
+    dpg.add_text("Enter a brief description of the function to be generated:")
+    dpg.add_input_text(label="", default_value=vars.description_text if vars.description_text else "", width=600, height=100, multiline=True, 
+                       callback=lambda s, a: vars.set_description_text(a))
     
     dpg.add_separator()
 

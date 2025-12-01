@@ -7,6 +7,7 @@ class Variables:
     function_parameters = "{}"
     function_output = None
     focus_mode = "Code simplicity"
+    description_text = ""
 
     @staticmethod
     def check():
@@ -36,6 +37,10 @@ class Variables:
     def set_focus_mode(mode):
         Variables.focus_mode = mode
         print(f"Focus mode set to: {Variables.focus_mode}")
+    @staticmethod
+    def set_description_text(text):
+        Variables.description_text = text
+        print(f"Description text set to: {Variables.description_text}")
 
     def read_config():
         try:
@@ -47,6 +52,7 @@ class Variables:
                 Variables.function_parameters = jsonconfig.get("function_parameters", {})
                 Variables.function_output = jsonconfig.get("function_output", None)
                 Variables.focus_mode = jsonconfig.get("focus_mode", "Code simplicity")
+                Variables.description_text = jsonconfig.get("description_text", "")
                 print("Configuration loaded from config.json")
 
         except FileNotFoundError:
@@ -59,7 +65,8 @@ class Variables:
             "theme_selected": Variables.theme_selected,
             "function_parameters": Variables.function_parameters,
             "function_output": Variables.function_output,
-            "focus_mode": Variables.focus_mode
+            "focus_mode": Variables.focus_mode,
+            "description_text": Variables.description_text
         }
         with open('config.json', 'w', encoding='utf-8') as f:
             json.dump(jsonconfig, f, ensure_ascii=False, indent=4)
