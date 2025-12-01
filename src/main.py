@@ -18,11 +18,11 @@ vars.read_config()
 def toggle_settings_window():
     if dpg.is_item_shown("options_window"):
         dpg.hide_item("options_window")
-        vars.set_checkbox_state(False)
+        vars.check()
         window_height = 600
     else:
         dpg.show_item("options_window")
-        vars.set_checkbox_state(True)
+        vars.check()
         window_height = 800
     dpg.set_viewport_height(window_height)
 def apply_theme(theme_name):
