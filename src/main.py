@@ -66,14 +66,15 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     dpg.add_button(label="Generate Function", width=200, height=50,indent=300 ,  
                    callback=lambda: print("Function generated with the selected parameters."))
     
-
+show_settings = vars.checkbox_state
     
-with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True, no_collapse=True, show=False):
+with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True, no_collapse=True, show=show_settings):
     dpg.add_text("Select the application theme:")
     dpg.add_radio_button(["global", "dark", "dracula", "terra"], default_value=vars.theme_selected, 
                          callback=lambda s, a: apply_theme(a))
 
-dpg.create_viewport(title="Functions Generator", width=800, height=600, resizable=False, small_icon=small_image_dir, large_icon=large_image_dir)
+viewport_height = 600 if not vars.checkbox_state else 800
+dpg.create_viewport(title="Functions Generator", width=800, height=viewport_height, resizable=False, small_icon=small_image_dir, large_icon=large_image_dir)
 dpg.setup_dearpygui()
 
 # Posicionar las ventanas
