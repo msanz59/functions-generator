@@ -154,11 +154,11 @@ viewport_height = 600 if not vars.checkbox_state else 800
 dpg.create_viewport(title="Functions Generator", width=800, height=viewport_height, resizable=False, small_icon=small_image_dir, large_icon=large_image_dir)
 dpg.setup_dearpygui()
 
-# Posicionar las ventanas
+# Position the windows
 dpg.set_item_pos("main_window", [0, 0])
 dpg.set_item_pos("options_window", [0, 600])
 
-# Aplicar el tema global
+# Apply saved theme
 theme_selected = vars.theme_selected
 theme = themes.themes[theme_selected] 
 dpg.bind_theme(theme)
