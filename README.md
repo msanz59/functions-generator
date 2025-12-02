@@ -17,6 +17,9 @@ An AI-powered function generator that creates code functions in various programm
 ![Main Interface](screenshots/main_interface.png)
 *Main interface with function generation options*
 
+![Function Generated](screenshots/function_generated.png)
+*Example of a generated function in Java*
+
 ![Themes](screenshots/themes.png)
 *Available themes: Aqua, Dark, Dracula, and Terra*
 
