@@ -3,7 +3,7 @@ import json
 class Variables:
     checkbox_state = False
     language_selected = ""
-    theme_selected = "global"
+    theme_selected = "dark"
     function_parameters = "{}"
     function_output = None
     focus_mode = "Code simplicity"
@@ -48,7 +48,7 @@ class Variables:
                 jsonconfig = json.load(f)
                 Variables.checkbox_state = jsonconfig.get("checkbox_state", False)
                 Variables.language_selected = jsonconfig.get("language_selected", "")
-                Variables.theme_selected = jsonconfig.get("theme_selected", "global")
+                Variables.theme_selected = jsonconfig.get("theme_selected", "dark")
                 Variables.function_parameters = jsonconfig.get("function_parameters", {})
                 Variables.function_output = jsonconfig.get("function_output", None)
                 Variables.focus_mode = jsonconfig.get("focus_mode", "Code simplicity")

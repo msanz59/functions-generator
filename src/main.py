@@ -29,7 +29,7 @@ def toggle_settings_window():
     dpg.set_viewport_height(window_height)
 
 def apply_theme(theme_name):
-    theme = themes.themes.get(theme_name, themes.themes["global"])
+    theme = themes.themes.get(theme_name, themes.themes["dark"])
     dpg.bind_theme(theme)
     vars.set_theme(theme_name)
 
@@ -89,7 +89,7 @@ with dpg.window(label="Program", tag="main_window", width=800, height=600, no_re
     dpg.add_combo(["Python", "JavaScript", "C++", "Java", "Rust"], 
                   default_value=vars.language_selected if vars.language_selected else "Python", callback=lambda s, a: vars.set_language(a))
     dpg.add_separator()
-    dpg.add_text("Enter the function parameters: ({'param1': 'value1', 'param2': 'value2'} or leave {} for none)")
+    dpg.add_text("Enter the function parameters: ({'param1': 'type1', 'param2': 'type2'} or leave {} for none)")
     dpg.add_input_text(label="Parameters", default_value=str(vars.function_parameters) if vars.function_parameters else "{}", width=400, 
                        callback=lambda s, a: vars.set_function_parameters(a))
     dpg.add_separator()
@@ -123,7 +123,7 @@ with dpg.window(label="Program Options", tag="options_window", width=800, height
     dpg.add_text("Select the application theme:")
 
     with dpg.group(horizontal=True):
-        dpg.add_radio_button(["global", "dark", "dracula", "terra"], default_value=vars.theme_selected, 
+        dpg.add_radio_button(["aqua", "dark", "dracula", "terra"], default_value=vars.theme_selected, 
                             callback=lambda s, a: apply_theme(a))
         dpg.add_button(label="Change Gemini's API Key", width=300, height=25, callback=lambda: dpg.show_item("gemini_config"))
     
