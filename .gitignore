@@ -6,6 +6,7 @@ src/etc/__pycache__/
 src/AI_Calls/__pycache__/
 *.pyc
 # Ignore configuration files
+src/config.json
 config.json
 src/.env
 .env
