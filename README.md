@@ -140,7 +140,7 @@ The API key is stored securely in your local `.env` file and never shared.
 
 ## License 📄
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU License - see the [LICENSE](LICENSE) file for details.
 
 ## Support 💬
 
