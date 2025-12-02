@@ -109,6 +109,7 @@ functions-generator/
 ├── src/
 │   ├── main.py              # Main application entry point
 │   ├── .env                 # Environment variables (API key)
+│   ├── config.json              # User preferences
 │   ├── AI_Calls/
 │   │   └── gemini.py        # Gemini API integration
 │   ├── etc/
@@ -116,7 +117,6 @@ functions-generator/
 │   └── gui/
 │       ├── themes.py        # UI themes
 │       └── icons/           # Application icons
-├── config.json              # User preferences
 ├── requirements.txt         # Python dependencies
 └── README.md                # This file
 ```

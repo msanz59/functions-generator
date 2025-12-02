@@ -1,0 +1,4 @@
+dearpygui ==2.1.1
+python-dotenv ==0.9.9
+google-genai ==1.52.0
+google-auth ==1.52.0
