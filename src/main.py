@@ -1,7 +1,7 @@
 import ctypes
 myappid = 'mycompany.myproduct.subproduct.'  
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-
+from dotenv import set_key
 import dearpygui.dearpygui as dpg
 from etc.variables import Variables as vars
 import os
@@ -67,6 +67,18 @@ def gen_function():
     thread.daemon = True
     thread.start()
 
+def save_gemini_key():
+    try:
+        api_key = dpg.get_value("api_key_input")
+        if api_key and api_key.strip():  
+            set_key("src/.env", "GEMINI_API_KEY", api_key.strip())
+            print("API Key saved successfully!")
+            dpg.hide_item("gemini_config")
+        else:
+            print("Please enter a valid API key")
+    except Exception as e:
+        print(f"Error saving API key: {e}")
+
 
 
 with dpg.window(label="Program", tag="main_window", width=800, height=600, no_resize=True, no_move=True, no_collapse=True, no_title_bar=True):
@@ -109,8 +121,11 @@ show_settings = vars.checkbox_state
     
 with dpg.window(label="Program Options", tag="options_window", width=800, height=200, no_resize=True, no_move=True, no_collapse=True, show=show_settings):
     dpg.add_text("Select the application theme:")
-    dpg.add_radio_button(["global", "dark", "dracula", "terra"], default_value=vars.theme_selected, 
-                         callback=lambda s, a: apply_theme(a))
+
+    with dpg.group(horizontal=True):
+        dpg.add_radio_button(["global", "dark", "dracula", "terra"], default_value=vars.theme_selected, 
+                            callback=lambda s, a: apply_theme(a))
+        dpg.add_button(label="Change Gemini's API Key", width=300, height=25, callback=lambda: dpg.show_item("gemini_config"))
     
 with dpg.window(label="Generating Function", tag="generating_popup", modal=True, show=False, no_resize=True, width=300, height=100, pos=[250, 200]):
     dpg.add_text("Your answer is being generated...")
@@ -122,7 +137,18 @@ with dpg.window(label="Generated!", tag="output_popup", show=False, no_resize=Tr
     dpg.add_separator()
     dpg.add_input_text(label="", tag="output_textbox", width=550, height=300, multiline=True)
     dpg.add_separator()
-    dpg.add_button(label="Close", width=75, height=25, callback=lambda: dpg.hide_item("output_popup"))
+    with dpg.group(horizontal=True):
+        dpg.add_button(label="Copy to Clipboard", width=150, height=25, 
+                       callback=lambda: dpg.set_clipboard_text(dpg.get_value("output_textbox")))
+        dpg.add_button(label="Close", width=75, height=25, callback=lambda: dpg.hide_item("output_popup"))
+
+with dpg.window(label="Gemini API Key", tag="gemini_config", show=False):
+    dpg.add_text("Enter your Gemini API Key:")
+    dpg.add_input_text(label="API Key", tag="api_key_input", width=400, default_value=os.getenv("GEMINI_API_KEY") if os.getenv("GEMINI_API_KEY") else "")
+    dpg.add_separator()
+    with dpg.group(horizontal=True):
+        dpg.add_button(label="Save API Key", width=120, height=30, callback=save_gemini_key)
+        dpg.add_button(label="Cancel", width=80, height=30, callback=lambda: dpg.hide_item("gemini_config"))
 
 viewport_height = 600 if not vars.checkbox_state else 800
 dpg.create_viewport(title="Functions Generator", width=800, height=viewport_height, resizable=False, small_icon=small_image_dir, large_icon=large_image_dir)
@@ -144,3 +170,4 @@ dpg.destroy_context()
 
 # Save config on exit
 vars.write_config()
+
